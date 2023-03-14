@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20230312215609">
+	<link rel="stylesheet" href="css/style.min.css?_v=20230314174610">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,7 +35,7 @@
 									<li class="menu__item"><a href="#" class="menu__link" data-title="Отзывы">Отзывы</a></li>
 								</ul>
 							</nav>
-							<a href="#" class="header__callback callback">Обратный звонок</a>
+							<a href="#" class="header__callback callback" data-popup="#form-popup">Обратный звонок</a>
 							<div class="header__contact contact">
 								<div class="contact__address">
 									<div class="contact__address-title">Адрес:</div>
@@ -328,7 +328,7 @@
 					<div class="footer__fast-connect">
 						<h3 class="footer__fast-connect-header footer-header">Быстрая связь</h3>
 						<a href="#" class="btn btn_footer">Забронировать</a>
-						<a href="#" class="callback_footer">Обратный звонок</a>
+						<a href="#" class="callback_footer" data-popup="#popup">Обратный звонок</a>
 					</div>
 					<div class="footer__to-top">
 						<button class="to-top"></button>
@@ -355,16 +355,36 @@
 			</div>
 		</footer>
 	</div>
-	<div id="popup" aria-hidden="true" class="popup">
+	<div id="form-popup" aria-hidden="true" class="popup">
 		<div class="popup__wrapper">
 			<div class="popup__content">
-				<button data-close type="button" class="popup__close">Закрыть</button>
-				<div class="popup__text">
+				<div class="popup__display-1">
+					<h2 class="popup__header header-title header-title_popup">Заполните форму!</h2>
+					<p class="popup__text">И наш специалист свяжиться с вами в ближайшее время.</p>
+					<form action="#" class="popup__form form" data-dev data-popup-message="#send-ok">
+						<input type="text" id="name" class="popup__name" name="form[]" placeholder="Ваше имя:" data-required>
+						<input type="tel" id="tel" class="popup__tel" name="form[]" placeholder="Телефон:" data-required>
+						<textarea name="form[]" id="text" class="popup__textarea" placeholder="Комментарий:" data-required></textarea>
+						<button type="submit" class="popup__submit">Отправить</button>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20230312215609"></script>
+
+
+	<div id="send-ok" aria-hidden="true" class="popup">
+		<div class="popup__wrapper">
+			<div class="popup__content">
+				<button></button>
+				<div class="popup__display-2">
+					<img src="img/check.svg" alt="ThankYou">
+					<div class="popup__thankyou">Спасибо за заявку!</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/app.min.js?_v=20230314174610"></script>
 </body>
 
 </html>

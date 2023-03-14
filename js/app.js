@@ -1,8 +1,8 @@
 (() => {
   "use strict";
-  class t {
-    constructor(t) {
-      let e = {
+  class e {
+    constructor(e) {
+      let t = {
         logging: !0,
         init: !0,
         attributeOpenButton: "data-popup",
@@ -52,11 +52,11 @@
           '[tabindex]:not([tabindex^="-"])',
         ]),
         (this.options = {
-          ...e,
           ...t,
-          classes: { ...e.classes, ...t?.classes },
-          hashSettings: { ...e.hashSettings, ...t?.hashSettings },
-          on: { ...e.on, ...t?.on },
+          ...e,
+          classes: { ...t.classes, ...e?.classes },
+          hashSettings: { ...t.hashSettings, ...e?.hashSettings },
+          on: { ...t.on, ...e?.on },
         }),
         this.options.init && this.initPopups();
     }
@@ -66,54 +66,54 @@
     eventsPopup() {
       document.addEventListener(
         "click",
-        function (t) {
-          const e = t.target.closest(`[${this.options.attributeOpenButton}]`);
-          if (e)
+        function (e) {
+          const t = e.target.closest(`[${this.options.attributeOpenButton}]`);
+          if (t)
             return (
-              t.preventDefault(),
-              (this._dataValue = e.getAttribute(
+              e.preventDefault(),
+              (this._dataValue = t.getAttribute(
                 this.options.attributeOpenButton
               )
-                ? e.getAttribute(this.options.attributeOpenButton)
+                ? t.getAttribute(this.options.attributeOpenButton)
                 : "error"),
               "error" !== this._dataValue
-                ? (this.isOpen || (this.lastFocusEl = e),
+                ? (this.isOpen || (this.lastFocusEl = t),
                   (this.targetOpen.selector = `${this._dataValue}`),
                   (this._selectorOpen = !0),
                   void this.open())
                 : void this.popupLogging(
-                    `Ой ой, не заполнен атрибут у ${e.classList}`
+                    `Ой ой, не заполнен атрибут у ${t.classList}`
                   )
             );
-          return t.target.closest(`[${this.options.attributeCloseButton}]`) ||
-            (!t.target.closest(`.${this.options.classes.popupContent}`) &&
+          return e.target.closest(`[${this.options.attributeCloseButton}]`) ||
+            (!e.target.closest(`.${this.options.classes.popupContent}`) &&
               this.isOpen)
-            ? (t.preventDefault(), void this.close())
+            ? (e.preventDefault(), void this.close())
             : void 0;
         }.bind(this)
       ),
         document.addEventListener(
           "keydown",
-          function (t) {
+          function (e) {
             if (
               this.options.closeEsc &&
-              27 == t.which &&
-              "Escape" === t.code &&
+              27 == e.which &&
+              "Escape" === e.code &&
               this.isOpen
             )
-              return t.preventDefault(), void this.close();
+              return e.preventDefault(), void this.close();
             this.options.focusCatch &&
-              9 == t.which &&
+              9 == e.which &&
               this.isOpen &&
-              this._focusCatch(t);
+              this._focusCatch(e);
           }.bind(this)
         ),
         document.querySelector("form[data-ajax],form[data-dev]") &&
           document.addEventListener(
             "formSent",
-            function (t) {
-              const e = t.detail.form.dataset.popupMessage;
-              e && this.open(e);
+            function (e) {
+              const t = e.detail.form.dataset.popupMessage;
+              t && this.open(t);
             }.bind(this)
           ),
         this.options.hashSettings.goHash &&
@@ -132,12 +132,12 @@
             }.bind(this)
           ));
     }
-    open(t) {
+    open(e) {
       if (
-        (t &&
-          "string" == typeof t &&
-          "" !== t.trim() &&
-          ((this.targetOpen.selector = t), (this._selectorOpen = !0)),
+        (e &&
+          "string" == typeof e &&
+          "" !== e.trim() &&
+          ((this.targetOpen.selector = e), (this._selectorOpen = !0)),
         this.isOpen && ((this._reopen = !0), this.close()),
         this._selectorOpen ||
           (this.targetOpen.selector = this.lastClosed.selector),
@@ -150,20 +150,20 @@
         if (
           this.targetOpen.element.hasAttribute(this.options.youtubeAttribute)
         ) {
-          const t = `https://www.youtube.com/embed/${this.targetOpen.element.getAttribute(
+          const e = `https://www.youtube.com/embed/${this.targetOpen.element.getAttribute(
               this.options.youtubeAttribute
             )}?rel=0&showinfo=0&autoplay=1`,
-            e = document.createElement("iframe");
-          e.setAttribute("allowfullscreen", "");
-          const s = this.options.setAutoplayYoutube ? "autoplay;" : "";
-          e.setAttribute("allow", `${s}; encrypted-media`),
-            e.setAttribute("src", t),
+            t = document.createElement("iframe");
+          t.setAttribute("allowfullscreen", "");
+          const o = this.options.setAutoplayYoutube ? "autoplay;" : "";
+          t.setAttribute("allow", `${o}; encrypted-media`),
+            t.setAttribute("src", e),
             this.targetOpen.element.querySelector(
               `[${this.options.youtubePlaceAttribute}]`
             ) &&
               this.targetOpen.element
                 .querySelector(`[${this.options.youtubePlaceAttribute}]`)
-                .appendChild(e);
+                .appendChild(t);
         }
         this.options.hashSettings.location &&
           (this._getHash(), this._setHash()),
@@ -172,7 +172,7 @@
             this.options.classes.popupActive
           ),
           document.body.classList.add(this.options.classes.bodyActive),
-          this._reopen ? (this._reopen = !1) : s(),
+          this._reopen ? (this._reopen = !1) : o(),
           this.targetOpen.element.setAttribute("aria-hidden", "false"),
           (this.previousOpen.selector = this.targetOpen.selector),
           (this.previousOpen.element = this.targetOpen.element),
@@ -190,13 +190,13 @@
           "Ой ой, такого попапа нет. Проверьте корректность ввода. "
         );
     }
-    close(t) {
-      t &&
-        "string" == typeof t &&
-        "" !== t.trim() &&
-        (this.previousOpen.selector = t),
+    close(e) {
+      e &&
+        "string" == typeof e &&
+        "" !== e.trim() &&
+        (this.previousOpen.selector = e),
         this.isOpen &&
-          e &&
+          t &&
           (this.options.on.beforeClose(this),
           this.targetOpen.element.hasAttribute(this.options.youtubeAttribute) &&
             this.targetOpen.element.querySelector(
@@ -211,7 +211,7 @@
           this.previousOpen.element.setAttribute("aria-hidden", "true"),
           this._reopen ||
             (document.body.classList.remove(this.options.classes.bodyActive),
-            s(),
+            o(),
             (this.isOpen = !1)),
           this._removeHash(),
           this._selectorOpen &&
@@ -230,16 +230,16 @@
           : this.targetOpen.selector.replace(".", "#"));
     }
     _openToHash() {
-      let t = document.querySelector(
+      let e = document.querySelector(
         `.${window.location.hash.replace("#", "")}`
       )
         ? `.${window.location.hash.replace("#", "")}`
         : document.querySelector(`${window.location.hash}`)
         ? `${window.location.hash}`
         : null;
-      document.querySelector(`[${this.options.attributeOpenButton}="${t}"]`) &&
-        t &&
-        this.open(t);
+      document.querySelector(`[${this.options.attributeOpenButton}="${e}"]`) &&
+        e &&
+        this.open(e);
     }
     _setHash() {
       history.pushState("", "", this.hash);
@@ -247,98 +247,268 @@
     _removeHash() {
       history.pushState("", "", window.location.href.split("#")[0]);
     }
-    _focusCatch(t) {
-      const e = this.targetOpen.element.querySelectorAll(this._focusEl),
-        s = Array.prototype.slice.call(e),
-        o = s.indexOf(document.activeElement);
-      t.shiftKey && 0 === o && (s[s.length - 1].focus(), t.preventDefault()),
-        t.shiftKey || o !== s.length - 1 || (s[0].focus(), t.preventDefault());
+    _focusCatch(e) {
+      const t = this.targetOpen.element.querySelectorAll(this._focusEl),
+        o = Array.prototype.slice.call(t),
+        s = o.indexOf(document.activeElement);
+      e.shiftKey && 0 === s && (o[o.length - 1].focus(), e.preventDefault()),
+        e.shiftKey || s !== o.length - 1 || (o[0].focus(), e.preventDefault());
     }
     _focusTrap() {
-      const t = this.previousOpen.element.querySelectorAll(this._focusEl);
+      const e = this.previousOpen.element.querySelectorAll(this._focusEl);
       !this.isOpen && this.lastFocusEl
         ? this.lastFocusEl.focus()
-        : t[0].focus();
+        : e[0].focus();
     }
-    popupLogging(t) {
-      this.options.logging &&
-        (function (t) {
-          setTimeout(() => {
-            window.FLS && console.log(t);
-          }, 0);
-        })(`[Попапос]: ${t}`);
+    popupLogging(e) {
+      this.options.logging && i(`[Попапос]: ${e}`);
     }
   }
-  let e = !0,
-    s = (t = 500) => {
-      document.documentElement.classList.contains("lock") ? o(t) : i(t);
+  let t = !0,
+    o = (e = 500) => {
+      document.documentElement.classList.contains("lock") ? s(e) : n(e);
     },
-    o = (t = 500) => {
-      let s = document.querySelector("body");
-      if (e) {
-        let o = document.querySelectorAll("[data-lp]");
+    s = (e = 500) => {
+      let o = document.querySelector("body");
+      if (t) {
+        let s = document.querySelectorAll("[data-lp]");
         setTimeout(() => {
-          for (let t = 0; t < o.length; t++) {
-            o[t].style.paddingRight = "0px";
+          for (let e = 0; e < s.length; e++) {
+            s[e].style.paddingRight = "0px";
           }
-          (s.style.paddingRight = "0px"),
+          (o.style.paddingRight = "0px"),
             document.documentElement.classList.remove("lock");
-        }, t),
-          (e = !1),
+        }, e),
+          (t = !1),
           setTimeout(function () {
-            e = !0;
-          }, t);
+            t = !0;
+          }, e);
       }
     },
-    i = (t = 500) => {
-      let s = document.querySelector("body");
-      if (e) {
-        let o = document.querySelectorAll("[data-lp]");
-        for (let t = 0; t < o.length; t++) {
-          o[t].style.paddingRight =
+    n = (e = 500) => {
+      let o = document.querySelector("body");
+      if (t) {
+        let s = document.querySelectorAll("[data-lp]");
+        for (let e = 0; e < s.length; e++) {
+          s[e].style.paddingRight =
             window.innerWidth -
             document.querySelector(".wrapper").offsetWidth +
             "px";
         }
-        (s.style.paddingRight =
+        (o.style.paddingRight =
           window.innerWidth -
           document.querySelector(".wrapper").offsetWidth +
           "px"),
           document.documentElement.classList.add("lock"),
-          (e = !1),
+          (t = !1),
           setTimeout(function () {
-            e = !0;
-          }, t);
+            t = !0;
+          }, e);
       }
     };
-  let n = !1;
+  function i(e) {
+    setTimeout(() => {
+      window.FLS && console.log(e);
+    }, 0);
+  }
+  let r = (e, t = !1, o = 500, n = 0) => {
+    const r = document.querySelector(e);
+    if (r) {
+      let l = "",
+        a = 0;
+      t &&
+        ((l = "header.header"), (a = document.querySelector(l).offsetHeight));
+      let c = {
+        speedAsDuration: !0,
+        speed: o,
+        header: l,
+        offset: n,
+        easing: "easeOutQuad",
+      };
+      if (
+        (document.documentElement.classList.contains("menu-open") &&
+          (s(), document.documentElement.classList.remove("menu-open")),
+        "undefined" != typeof SmoothScroll)
+      )
+        new SmoothScroll().animateScroll(r, "", c);
+      else {
+        let e = r.getBoundingClientRect().top + scrollY;
+        window.scrollTo({ top: a ? e - a : e, behavior: "smooth" });
+      }
+      i(`[gotoBlock]: Юхуу...едем к ${e}`);
+    } else i(`[gotoBlock]: Ой ой..Такого блока нет на странице: ${e}`);
+  };
+  const l = { inputMaskModule: null, selectModule: null };
+  let a = {
+    getErrors(e) {
+      let t = 0,
+        o = e.querySelectorAll("*[data-required]");
+      return (
+        o.length &&
+          o.forEach((e) => {
+            (null === e.offsetParent && "SELECT" !== e.tagName) ||
+              e.disabled ||
+              (t += this.validateInput(e));
+          }),
+        t
+      );
+    },
+    validateInput(e) {
+      let t = 0;
+      return (
+        "email" === e.dataset.required
+          ? ((e.value = e.value.replace(" ", "")),
+            this.emailTest(e) ? (this.addError(e), t++) : this.removeError(e))
+          : ("checkbox" !== e.type || e.checked) && e.value
+          ? this.removeError(e)
+          : (this.addError(e), t++),
+        t
+      );
+    },
+    addError(e) {
+      e.classList.add("_form-error"),
+        e.parentElement.classList.add("_form-error");
+      let t = e.parentElement.querySelector(".form__error");
+      t && e.parentElement.removeChild(t),
+        e.dataset.error &&
+          e.parentElement.insertAdjacentHTML(
+            "beforeend",
+            `<div class="form__error">${e.dataset.error}</div>`
+          );
+    },
+    removeError(e) {
+      e.classList.remove("_form-error"),
+        e.parentElement.classList.remove("_form-error"),
+        e.parentElement.querySelector(".form__error") &&
+          e.parentElement.removeChild(
+            e.parentElement.querySelector(".form__error")
+          );
+    },
+    formClean(e) {
+      e.reset(),
+        setTimeout(() => {
+          let t = e.querySelectorAll("input,textarea");
+          for (let e = 0; e < t.length; e++) {
+            const o = t[e];
+            o.parentElement.classList.remove("_form-focus"),
+              o.classList.remove("_form-focus"),
+              a.removeError(o),
+              (o.value = o.dataset.placeholder);
+          }
+          let o = e.querySelectorAll(".checkbox__input");
+          if (o.length > 0)
+            for (let e = 0; e < o.length; e++) {
+              o[e].checked = !1;
+            }
+          if (l.selectModule) {
+            let t = e.querySelectorAll(".select");
+            if (t.length)
+              for (let e = 0; e < t.length; e++) {
+                const o = t[e].querySelector("select");
+                l.selectModule.selectBuild(o);
+              }
+          }
+        }, 0);
+    },
+    emailTest: (e) =>
+      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(e.value),
+  };
+  let c = !1;
   setTimeout(() => {
-    if (n) {
-      let t = new Event("windowScroll");
-      window.addEventListener("scroll", function (e) {
-        document.dispatchEvent(t);
+    if (c) {
+      let e = new Event("windowScroll");
+      window.addEventListener("scroll", function (t) {
+        document.dispatchEvent(e);
       });
     }
   }, 0),
     (window.FLS = !0),
-    (function (t) {
-      let e = new Image();
-      (e.onload = e.onerror =
+    (function (e) {
+      let t = new Image();
+      (t.onload = t.onerror =
         function () {
-          t(2 == e.height);
+          e(2 == t.height);
         }),
-        (e.src =
+        (t.src =
           "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA");
-    })(function (t) {
-      let e = !0 === t ? "webp" : "no-webp";
-      document.documentElement.classList.add(e);
+    })(function (e) {
+      let t = !0 === e ? "webp" : "no-webp";
+      document.documentElement.classList.add(t);
     }),
     (function () {
-      let t = document.querySelector(".icon-menu");
-      t &&
-        t.addEventListener("click", function (t) {
-          e && (s(), document.documentElement.classList.toggle("menu-open"));
+      let e = document.querySelector(".icon-menu");
+      e &&
+        e.addEventListener("click", function (e) {
+          t && (o(), document.documentElement.classList.toggle("menu-open"));
         });
     })(),
-    new t({});
+    new e({}),
+    (function () {
+      const e = document.querySelectorAll(
+        "input[placeholder],textarea[placeholder]"
+      );
+      e.length &&
+        e.forEach((e) => {
+          e.dataset.placeholder = e.placeholder;
+        }),
+        document.body.addEventListener("focusin", function (e) {
+          const t = e.target;
+          ("INPUT" !== t.tagName && "TEXTAREA" !== t.tagName) ||
+            (t.dataset.placeholder && (t.placeholder = ""),
+            t.classList.add("_form-focus"),
+            t.parentElement.classList.add("_form-focus"),
+            a.removeError(t));
+        }),
+        document.body.addEventListener("focusout", function (e) {
+          const t = e.target;
+          ("INPUT" !== t.tagName && "TEXTAREA" !== t.tagName) ||
+            (t.dataset.placeholder && (t.placeholder = t.dataset.placeholder),
+            t.classList.remove("_form-focus"),
+            t.parentElement.classList.remove("_form-focus"),
+            t.hasAttribute("data-validate") && a.validateInput(t));
+        });
+    })(),
+    (function (e) {
+      const t = document.forms;
+      if (t.length)
+        for (const e of t)
+          e.addEventListener("submit", function (e) {
+            o(e.target, e);
+          }),
+            e.addEventListener("reset", function (e) {
+              const t = e.target;
+              a.formClean(t);
+            });
+      async function o(t, o) {
+        if (0 === (e ? a.getErrors(t) : 0)) {
+          if (t.hasAttribute("data-ajax")) {
+            o.preventDefault();
+            const e = t.getAttribute("action")
+                ? t.getAttribute("action").trim()
+                : "#",
+              n = t.getAttribute("method")
+                ? t.getAttribute("method").trim()
+                : "GET",
+              i = new FormData(t);
+            t.classList.add("_sending");
+            const r = await fetch(e, { method: n, body: i });
+            if (r.ok) {
+              await r.json();
+              t.classList.remove("_sending"), s(t);
+            } else alert("Ошибка"), t.classList.remove("_sending");
+          } else t.hasAttribute("data-dev") && (o.preventDefault(), s(t));
+        } else {
+          o.preventDefault();
+          const e = t.querySelector("._form-error");
+          e && t.hasAttribute("data-goto-error") && r(e, !0, 1e3);
+        }
+      }
+      function s(e) {
+        document.dispatchEvent(
+          new CustomEvent("formSent", { detail: { form: e } })
+        ),
+          a.formClean(e),
+          i(`[Формы]: ${"Форма отправлена!"}`);
+      }
+    })(!0);
 })();
