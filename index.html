@@ -6,15 +6,15 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20230314174610">
+	<link rel="stylesheet" href="css/style.min.css?_v=20230315152253">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<body id="topSite">
 	<div class="wrapper">
-		<header class="header">
+		<header class="header" data-scroll="120" data-scroll-show>
 			<div class="header__container">
 				<div class="header__content">
 					<a class="header__logo">
@@ -28,11 +28,21 @@
 						<div class="menu__body">
 							<nav class="menu__nav">
 								<ul class="menu__list">
-									<li class="menu__item"><a href="#" class="menu__link menu__link_active" data-title="Главная">Главная</a></li>
-									<li class="menu__item"><a href="#" class="menu__link" data-title="О гостинице">О гостинице</a></li>
-									<li class="menu__item"><a href="#" class="menu__link" data-title="Преимущества">Преимущества</a></li>
-									<li class="menu__item"><a href="#" class="menu__link" data-title="Номера">Номера</a></li>
-									<li class="menu__item"><a href="#" class="menu__link" data-title="Отзывы">Отзывы</a></li>
+									<li class="menu__item">
+										<a href="#" class="menu__link" data-title="Главная" data-goto="#main-block" data-goto-header>Главная</a>
+									</li>
+									<li class="menu__item">
+										<a href="#" class="menu__link" data-title="О гостинице" data-goto="#about" data-goto-header>О гостинице</a>
+									</li>
+									<li class="menu__item">
+										<a href="#" class="menu__link" data-title="Преимущества" data-goto="#projection" data-goto-header>Преимущества</a>
+									</li>
+									<li class="menu__item">
+										<a href="#" class="menu__link" data-title="Номера" data-goto="#rooms" data-goto-header>Номера</a>
+									</li>
+									<li class="menu__item">
+										<a href="#" class="menu__link" data-title="Отзывы" data-goto="#reviews" data-goto-header>Отзывы</a>
+									</li>
 								</ul>
 							</nav>
 							<a href="#" class="header__callback callback" data-popup="#form-popup">Обратный звонок</a>
@@ -56,7 +66,7 @@
 			</div>
 		</header>
 		<main class="page">
-			<section class="home-block">
+			<section class="home-block" id="main-block" data-watch="navigator" data-watch-threshold="1">
 				<div class="home-block__container">
 					<div class="home-block__boby">
 						<h1 class="home-block__header">Байкал<span>гостиница</span></h1>
@@ -70,7 +80,7 @@
 					</div>
 				</div>
 			</section>
-			<section class="about">
+			<section class="about" id="about" data-watch="navigator" data-watch-threshold="0.4">
 				<div class="about__container">
 					<h2 class="about__header header-title">О гостинице</h2>
 					<div class="about__content">
@@ -91,9 +101,9 @@
 					</div>
 				</div>
 			</section>
-			<section class="projection">
+			<section class="projection" id="projection" data-watch="navigator" data-watch-threshold="0.4">
 				<div class="projection__container">
-					<h2 class="projection__header header-title">Мы предлогаем</h2>
+					<h2 class="projection__header header-title">Мы предлагаем</h2>
 					<div class="projection__grid">
 						<acticle class="acticle">
 							<div class="acticle__img">
@@ -161,7 +171,7 @@
 					</div>
 				</div>
 			</section>
-			<section class="rooms">
+			<section class="rooms" id="rooms" data-watch="navigator" data-watch-threshold="0.4">
 				<div class="rooms__container">
 					<div class="rooms__header header-title">Наши номера</div>
 					<div class="rooms__content">
@@ -222,7 +232,7 @@
 					</div>
 				</div>
 			</section>
-			<section class="reviews">
+			<section class="reviews" id="reviews" data-watch="navigator" data-watch-threshold="0.4">
 				<div class="reviews__container">
 					<div class="reviews__header header-title">Выши отзывы</div>
 					<div class="reviews__grid">
@@ -328,10 +338,10 @@
 					<div class="footer__fast-connect">
 						<h3 class="footer__fast-connect-header footer-header">Быстрая связь</h3>
 						<a href="#" class="btn btn_footer">Забронировать</a>
-						<a href="#" class="callback_footer" data-popup="#popup">Обратный звонок</a>
+						<a href="#" class="callback callback_footer" data-popup="#form-popup">Обратный звонок</a>
 					</div>
 					<div class="footer__to-top">
-						<button class="to-top"></button>
+						<button class="to-top" data-goto="#topSite"></button>
 					</div>
 					<div class="footer__contact">
 						<h3 class="footer__contact-header footer-header">Контакты</h3>
@@ -384,7 +394,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20230314174610"></script>
+	<script src="js/app.min.js?_v=20230315152253"></script>
 </body>
 
 </html>

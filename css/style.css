@@ -452,6 +452,13 @@ body.popup-show::after {
   object-fit: contain;
 }
 
+.btn {
+  background: #D95845;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  z-index: 1;
+}
 .btn_book-main {
   align-self: flex-start;
   display: inline-flex;
@@ -460,7 +467,6 @@ body.popup-show::after {
   color: #FFFFFF;
   font-weight: 700;
   letter-spacing: 0.03em;
-  background: #D95845;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 17px 48px;
@@ -485,6 +491,41 @@ body.popup-show::after {
     padding: 18px 23px;
   }
 }
+.btn_footer {
+  width: 210px;
+  height: 40px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.3888888889;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: 0.03em;
+  color: #FFFFFF;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #2F70D9;
+  transform: translateX(-100%);
+  width: 110%;
+  height: 110%;
+  transition: all 0.3s ease-in-out;
+  z-index: -1;
+}
+@media (any-hover: hover) {
+  .btn:hover {
+    color: #FFFFFF;
+  }
+  .btn:hover:before {
+    transform: translateX(0);
+  }
+}
 
 .callback {
   box-sizing: border-box;
@@ -497,6 +538,40 @@ body.popup-show::after {
   color: #2F70D9;
   border: 2px solid #2F70D9;
   border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  z-index: 1;
+}
+.callback_footer {
+  width: 210px;
+  height: 40px;
+  font-size: 1.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0;
+}
+.callback::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #2F70D9;
+  transform: translateX(-100%);
+  width: 110%;
+  height: 110%;
+  transition: all 0.3s ease-in-out;
+  z-index: -1;
+}
+@media (any-hover: hover) {
+  .callback:hover {
+    color: #FFFFFF;
+  }
+  .callback:hover:before {
+    transform: translateX(0);
+  }
 }
 
 .contact {
@@ -751,7 +826,18 @@ body.popup-show::after {
 
 .header {
   background-color: #FFFFFF;
-  position: relative;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+}
+.header._header-scroll {
+  position: fixed;
+  top: -200%;
+}
+.header._header-show {
+  transition: top 0.3s ease 0s;
+  top: 0;
+  box-shadow: 0 1px 20px 1px #5c5b5b;
 }
 @media (max-width: 47.99875em) {
   .header:before {
@@ -908,11 +994,11 @@ body.popup-show::after {
   opacity: 0;
   transition: all 0.3s ease-in-out;
 }
-.menu__link_active {
+.menu__link._navigator-active {
   font-weight: 800;
   color: #2F70D9;
 }
-.menu__link_active::before {
+.menu__link._navigator-active::before {
   width: 110%;
   opacity: 1;
 }
@@ -938,7 +1024,7 @@ body.popup-show::after {
     right: -30px;
     transform: translate(100%, -50%);
   }
-  .menu__link_active::before {
+  .menu__link._navigator-active::before {
     width: 97px;
     opacity: 1;
   }
@@ -1013,6 +1099,7 @@ body.popup-show::after {
 }
 @media (max-width: 47.99875em) {
   .footer__content {
+    position: relative;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
@@ -1064,7 +1151,10 @@ body.popup-show::after {
 }
 @media (max-width: 47.99875em) {
   .footer__to-top {
-    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 0px;
   }
 }
 .footer__contact {
@@ -1172,39 +1262,6 @@ body.popup-show::after {
   line-height: 1.3888888889;
   letter-spacing: 0.03em;
   color: #FFFFFF;
-}
-
-.btn_footer {
-  width: 210px;
-  height: 40px;
-  background: #D95845;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  font-weight: 700;
-  font-size: 1.125rem;
-  line-height: 1.3888888889;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  letter-spacing: 0.03em;
-  color: #FFFFFF;
-}
-
-.callback_footer {
-  width: 210px;
-  height: 40px;
-  border: 2px solid #2F70D9;
-  border-radius: 5px;
-  font-weight: 600;
-  font-size: 1.125rem;
-  line-height: 1.3888888889;
-  letter-spacing: 0.03em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #2F70D9;
 }
 
 .to-top {

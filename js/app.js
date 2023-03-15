@@ -1,8 +1,8 @@
 (() => {
   "use strict";
-  class e {
-    constructor(e) {
-      let t = {
+  class t {
+    constructor(t) {
+      let e = {
         logging: !0,
         init: !0,
         attributeOpenButton: "data-popup",
@@ -52,11 +52,11 @@
           '[tabindex]:not([tabindex^="-"])',
         ]),
         (this.options = {
-          ...t,
           ...e,
-          classes: { ...t.classes, ...e?.classes },
-          hashSettings: { ...t.hashSettings, ...e?.hashSettings },
-          on: { ...t.on, ...e?.on },
+          ...t,
+          classes: { ...e.classes, ...t?.classes },
+          hashSettings: { ...e.hashSettings, ...t?.hashSettings },
+          on: { ...e.on, ...t?.on },
         }),
         this.options.init && this.initPopups();
     }
@@ -66,54 +66,54 @@
     eventsPopup() {
       document.addEventListener(
         "click",
-        function (e) {
-          const t = e.target.closest(`[${this.options.attributeOpenButton}]`);
-          if (t)
+        function (t) {
+          const e = t.target.closest(`[${this.options.attributeOpenButton}]`);
+          if (e)
             return (
-              e.preventDefault(),
-              (this._dataValue = t.getAttribute(
+              t.preventDefault(),
+              (this._dataValue = e.getAttribute(
                 this.options.attributeOpenButton
               )
-                ? t.getAttribute(this.options.attributeOpenButton)
+                ? e.getAttribute(this.options.attributeOpenButton)
                 : "error"),
               "error" !== this._dataValue
-                ? (this.isOpen || (this.lastFocusEl = t),
+                ? (this.isOpen || (this.lastFocusEl = e),
                   (this.targetOpen.selector = `${this._dataValue}`),
                   (this._selectorOpen = !0),
                   void this.open())
                 : void this.popupLogging(
-                    `Ой ой, не заполнен атрибут у ${t.classList}`
+                    `Ой ой, не заполнен атрибут у ${e.classList}`
                   )
             );
-          return e.target.closest(`[${this.options.attributeCloseButton}]`) ||
-            (!e.target.closest(`.${this.options.classes.popupContent}`) &&
+          return t.target.closest(`[${this.options.attributeCloseButton}]`) ||
+            (!t.target.closest(`.${this.options.classes.popupContent}`) &&
               this.isOpen)
-            ? (e.preventDefault(), void this.close())
+            ? (t.preventDefault(), void this.close())
             : void 0;
         }.bind(this)
       ),
         document.addEventListener(
           "keydown",
-          function (e) {
+          function (t) {
             if (
               this.options.closeEsc &&
-              27 == e.which &&
-              "Escape" === e.code &&
+              27 == t.which &&
+              "Escape" === t.code &&
               this.isOpen
             )
-              return e.preventDefault(), void this.close();
+              return t.preventDefault(), void this.close();
             this.options.focusCatch &&
-              9 == e.which &&
+              9 == t.which &&
               this.isOpen &&
-              this._focusCatch(e);
+              this._focusCatch(t);
           }.bind(this)
         ),
         document.querySelector("form[data-ajax],form[data-dev]") &&
           document.addEventListener(
             "formSent",
-            function (e) {
-              const t = e.detail.form.dataset.popupMessage;
-              t && this.open(t);
+            function (t) {
+              const e = t.detail.form.dataset.popupMessage;
+              e && this.open(e);
             }.bind(this)
           ),
         this.options.hashSettings.goHash &&
@@ -132,12 +132,12 @@
             }.bind(this)
           ));
     }
-    open(e) {
+    open(t) {
       if (
-        (e &&
-          "string" == typeof e &&
-          "" !== e.trim() &&
-          ((this.targetOpen.selector = e), (this._selectorOpen = !0)),
+        (t &&
+          "string" == typeof t &&
+          "" !== t.trim() &&
+          ((this.targetOpen.selector = t), (this._selectorOpen = !0)),
         this.isOpen && ((this._reopen = !0), this.close()),
         this._selectorOpen ||
           (this.targetOpen.selector = this.lastClosed.selector),
@@ -150,20 +150,20 @@
         if (
           this.targetOpen.element.hasAttribute(this.options.youtubeAttribute)
         ) {
-          const e = `https://www.youtube.com/embed/${this.targetOpen.element.getAttribute(
+          const t = `https://www.youtube.com/embed/${this.targetOpen.element.getAttribute(
               this.options.youtubeAttribute
             )}?rel=0&showinfo=0&autoplay=1`,
-            t = document.createElement("iframe");
-          t.setAttribute("allowfullscreen", "");
+            e = document.createElement("iframe");
+          e.setAttribute("allowfullscreen", "");
           const o = this.options.setAutoplayYoutube ? "autoplay;" : "";
-          t.setAttribute("allow", `${o}; encrypted-media`),
-            t.setAttribute("src", e),
+          e.setAttribute("allow", `${o}; encrypted-media`),
+            e.setAttribute("src", t),
             this.targetOpen.element.querySelector(
               `[${this.options.youtubePlaceAttribute}]`
             ) &&
               this.targetOpen.element
                 .querySelector(`[${this.options.youtubePlaceAttribute}]`)
-                .appendChild(t);
+                .appendChild(e);
         }
         this.options.hashSettings.location &&
           (this._getHash(), this._setHash()),
@@ -190,13 +190,13 @@
           "Ой ой, такого попапа нет. Проверьте корректность ввода. "
         );
     }
-    close(e) {
-      e &&
-        "string" == typeof e &&
-        "" !== e.trim() &&
-        (this.previousOpen.selector = e),
+    close(t) {
+      t &&
+        "string" == typeof t &&
+        "" !== t.trim() &&
+        (this.previousOpen.selector = t),
         this.isOpen &&
-          t &&
+          e &&
           (this.options.on.beforeClose(this),
           this.targetOpen.element.hasAttribute(this.options.youtubeAttribute) &&
             this.targetOpen.element.querySelector(
@@ -230,16 +230,16 @@
           : this.targetOpen.selector.replace(".", "#"));
     }
     _openToHash() {
-      let e = document.querySelector(
+      let t = document.querySelector(
         `.${window.location.hash.replace("#", "")}`
       )
         ? `.${window.location.hash.replace("#", "")}`
         : document.querySelector(`${window.location.hash}`)
         ? `${window.location.hash}`
         : null;
-      document.querySelector(`[${this.options.attributeOpenButton}="${e}"]`) &&
-        e &&
-        this.open(e);
+      document.querySelector(`[${this.options.attributeOpenButton}="${t}"]`) &&
+        t &&
+        this.open(t);
     }
     _setHash() {
       history.pushState("", "", this.hash);
@@ -247,50 +247,50 @@
     _removeHash() {
       history.pushState("", "", window.location.href.split("#")[0]);
     }
-    _focusCatch(e) {
-      const t = this.targetOpen.element.querySelectorAll(this._focusEl),
-        o = Array.prototype.slice.call(t),
+    _focusCatch(t) {
+      const e = this.targetOpen.element.querySelectorAll(this._focusEl),
+        o = Array.prototype.slice.call(e),
         s = o.indexOf(document.activeElement);
-      e.shiftKey && 0 === s && (o[o.length - 1].focus(), e.preventDefault()),
-        e.shiftKey || s !== o.length - 1 || (o[0].focus(), e.preventDefault());
+      t.shiftKey && 0 === s && (o[o.length - 1].focus(), t.preventDefault()),
+        t.shiftKey || s !== o.length - 1 || (o[0].focus(), t.preventDefault());
     }
     _focusTrap() {
-      const e = this.previousOpen.element.querySelectorAll(this._focusEl);
+      const t = this.previousOpen.element.querySelectorAll(this._focusEl);
       !this.isOpen && this.lastFocusEl
         ? this.lastFocusEl.focus()
-        : e[0].focus();
+        : t[0].focus();
     }
-    popupLogging(e) {
-      this.options.logging && i(`[Попапос]: ${e}`);
+    popupLogging(t) {
+      this.options.logging && i(`[Попапос]: ${t}`);
     }
   }
-  let t = !0,
-    o = (e = 500) => {
-      document.documentElement.classList.contains("lock") ? s(e) : n(e);
+  let e = !0,
+    o = (t = 500) => {
+      document.documentElement.classList.contains("lock") ? s(t) : n(t);
     },
-    s = (e = 500) => {
+    s = (t = 500) => {
       let o = document.querySelector("body");
-      if (t) {
+      if (e) {
         let s = document.querySelectorAll("[data-lp]");
         setTimeout(() => {
-          for (let e = 0; e < s.length; e++) {
-            s[e].style.paddingRight = "0px";
+          for (let t = 0; t < s.length; t++) {
+            s[t].style.paddingRight = "0px";
           }
           (o.style.paddingRight = "0px"),
             document.documentElement.classList.remove("lock");
-        }, e),
-          (t = !1),
+        }, t),
+          (e = !1),
           setTimeout(function () {
-            t = !0;
-          }, e);
+            e = !0;
+          }, t);
       }
     },
-    n = (e = 500) => {
+    n = (t = 500) => {
       let o = document.querySelector("body");
-      if (t) {
+      if (e) {
         let s = document.querySelectorAll("[data-lp]");
-        for (let e = 0; e < s.length; e++) {
-          s[e].style.paddingRight =
+        for (let t = 0; t < s.length; t++) {
+          s[t].style.paddingRight =
             window.innerWidth -
             document.querySelector(".wrapper").offsetWidth +
             "px";
@@ -300,28 +300,33 @@
           document.querySelector(".wrapper").offsetWidth +
           "px"),
           document.documentElement.classList.add("lock"),
-          (t = !1),
+          (e = !1),
           setTimeout(function () {
-            t = !0;
-          }, e);
+            e = !0;
+          }, t);
       }
     };
-  function i(e) {
+  function i(t) {
     setTimeout(() => {
-      window.FLS && console.log(e);
+      window.FLS && console.log(t);
     }, 0);
   }
-  let r = (e, t = !1, o = 500, n = 0) => {
-    const r = document.querySelector(e);
+  function r(t) {
+    return t.filter(function (t, e, o) {
+      return o.indexOf(t) === e;
+    });
+  }
+  let a = (t, e = !1, o = 500, n = 0) => {
+    const r = document.querySelector(t);
     if (r) {
-      let l = "",
-        a = 0;
-      t &&
-        ((l = "header.header"), (a = document.querySelector(l).offsetHeight));
+      let a = "",
+        l = 0;
+      e &&
+        ((a = "header.header"), (l = document.querySelector(a).offsetHeight));
       let c = {
         speedAsDuration: !0,
         speed: o,
-        header: l,
+        header: a,
         offset: n,
         easing: "easeOutQuad",
       };
@@ -332,183 +337,354 @@
       )
         new SmoothScroll().animateScroll(r, "", c);
       else {
-        let e = r.getBoundingClientRect().top + scrollY;
-        window.scrollTo({ top: a ? e - a : e, behavior: "smooth" });
+        let t = r.getBoundingClientRect().top + scrollY;
+        window.scrollTo({ top: l ? t - l : t, behavior: "smooth" });
       }
-      i(`[gotoBlock]: Юхуу...едем к ${e}`);
-    } else i(`[gotoBlock]: Ой ой..Такого блока нет на странице: ${e}`);
+      i(`[gotoBlock]: Юхуу...едем к ${t}`);
+    } else i(`[gotoBlock]: Ой ой..Такого блока нет на странице: ${t}`);
   };
   const l = { inputMaskModule: null, selectModule: null };
-  let a = {
-    getErrors(e) {
-      let t = 0,
-        o = e.querySelectorAll("*[data-required]");
+  let c = {
+    getErrors(t) {
+      let e = 0,
+        o = t.querySelectorAll("*[data-required]");
       return (
         o.length &&
-          o.forEach((e) => {
-            (null === e.offsetParent && "SELECT" !== e.tagName) ||
-              e.disabled ||
-              (t += this.validateInput(e));
+          o.forEach((t) => {
+            (null === t.offsetParent && "SELECT" !== t.tagName) ||
+              t.disabled ||
+              (e += this.validateInput(t));
           }),
-        t
+        e
       );
     },
-    validateInput(e) {
-      let t = 0;
+    validateInput(t) {
+      let e = 0;
       return (
-        "email" === e.dataset.required
-          ? ((e.value = e.value.replace(" ", "")),
-            this.emailTest(e) ? (this.addError(e), t++) : this.removeError(e))
-          : ("checkbox" !== e.type || e.checked) && e.value
-          ? this.removeError(e)
-          : (this.addError(e), t++),
-        t
+        "email" === t.dataset.required
+          ? ((t.value = t.value.replace(" ", "")),
+            this.emailTest(t) ? (this.addError(t), e++) : this.removeError(t))
+          : ("checkbox" !== t.type || t.checked) && t.value
+          ? this.removeError(t)
+          : (this.addError(t), e++),
+        e
       );
     },
-    addError(e) {
-      e.classList.add("_form-error"),
-        e.parentElement.classList.add("_form-error");
-      let t = e.parentElement.querySelector(".form__error");
-      t && e.parentElement.removeChild(t),
-        e.dataset.error &&
-          e.parentElement.insertAdjacentHTML(
+    addError(t) {
+      t.classList.add("_form-error"),
+        t.parentElement.classList.add("_form-error");
+      let e = t.parentElement.querySelector(".form__error");
+      e && t.parentElement.removeChild(e),
+        t.dataset.error &&
+          t.parentElement.insertAdjacentHTML(
             "beforeend",
-            `<div class="form__error">${e.dataset.error}</div>`
+            `<div class="form__error">${t.dataset.error}</div>`
           );
     },
-    removeError(e) {
-      e.classList.remove("_form-error"),
-        e.parentElement.classList.remove("_form-error"),
-        e.parentElement.querySelector(".form__error") &&
-          e.parentElement.removeChild(
-            e.parentElement.querySelector(".form__error")
+    removeError(t) {
+      t.classList.remove("_form-error"),
+        t.parentElement.classList.remove("_form-error"),
+        t.parentElement.querySelector(".form__error") &&
+          t.parentElement.removeChild(
+            t.parentElement.querySelector(".form__error")
           );
     },
-    formClean(e) {
-      e.reset(),
+    formClean(t) {
+      t.reset(),
         setTimeout(() => {
-          let t = e.querySelectorAll("input,textarea");
-          for (let e = 0; e < t.length; e++) {
-            const o = t[e];
+          let e = t.querySelectorAll("input,textarea");
+          for (let t = 0; t < e.length; t++) {
+            const o = e[t];
             o.parentElement.classList.remove("_form-focus"),
               o.classList.remove("_form-focus"),
-              a.removeError(o),
+              c.removeError(o),
               (o.value = o.dataset.placeholder);
           }
-          let o = e.querySelectorAll(".checkbox__input");
+          let o = t.querySelectorAll(".checkbox__input");
           if (o.length > 0)
-            for (let e = 0; e < o.length; e++) {
-              o[e].checked = !1;
+            for (let t = 0; t < o.length; t++) {
+              o[t].checked = !1;
             }
           if (l.selectModule) {
-            let t = e.querySelectorAll(".select");
-            if (t.length)
-              for (let e = 0; e < t.length; e++) {
-                const o = t[e].querySelector("select");
+            let e = t.querySelectorAll(".select");
+            if (e.length)
+              for (let t = 0; t < e.length; t++) {
+                const o = e[t].querySelector("select");
                 l.selectModule.selectBuild(o);
               }
           }
         }, 0);
     },
-    emailTest: (e) =>
-      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(e.value),
+    emailTest: (t) =>
+      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(t.value),
   };
-  let c = !1;
+  class h {
+    constructor(t) {
+      (this.config = Object.assign({ logging: !0 }, t)),
+        this.observer,
+        !document.documentElement.classList.contains("watcher") &&
+          this.scrollWatcherRun();
+    }
+    scrollWatcherUpdate() {
+      this.scrollWatcherRun();
+    }
+    scrollWatcherRun() {
+      document.documentElement.classList.add("watcher"),
+        this.scrollWatcherConstructor(
+          document.querySelectorAll("[data-watch]")
+        );
+    }
+    scrollWatcherConstructor(t) {
+      if (t.length) {
+        this.scrollWatcherLogging(
+          `Проснулся, слежу за объектами (${t.length})...`
+        ),
+          r(
+            Array.from(t).map(function (t) {
+              return `${
+                t.dataset.watchRoot ? t.dataset.watchRoot : null
+              }|${t.dataset.watchMargin ? t.dataset.watchMargin : "0px"}|${t.dataset.watchThreshold ? t.dataset.watchThreshold : 0}`;
+            })
+          ).forEach((e) => {
+            let o = e.split("|"),
+              s = { root: o[0], margin: o[1], threshold: o[2] },
+              n = Array.from(t).filter(function (t) {
+                let e = t.dataset.watchRoot ? t.dataset.watchRoot : null,
+                  o = t.dataset.watchMargin ? t.dataset.watchMargin : "0px",
+                  n = t.dataset.watchThreshold ? t.dataset.watchThreshold : 0;
+                if (
+                  String(e) === s.root &&
+                  String(o) === s.margin &&
+                  String(n) === s.threshold
+                )
+                  return t;
+              }),
+              i = this.getScrollWatcherConfig(s);
+            this.scrollWatcherInit(n, i);
+          });
+      } else
+        this.scrollWatcherLogging("Сплю, нет объектов для слежения. ZzzZZzz");
+    }
+    getScrollWatcherConfig(t) {
+      let e = {};
+      if (
+        (document.querySelector(t.root)
+          ? (e.root = document.querySelector(t.root))
+          : "null" !== t.root &&
+            this.scrollWatcherLogging(
+              `Эмм... родительского объекта ${t.root} нет на странице`
+            ),
+        (e.rootMargin = t.margin),
+        !(t.margin.indexOf("px") < 0 && t.margin.indexOf("%") < 0))
+      ) {
+        if ("prx" === t.threshold) {
+          t.threshold = [];
+          for (let e = 0; e <= 1; e += 0.005) t.threshold.push(e);
+        } else t.threshold = t.threshold.split(",");
+        return (e.threshold = t.threshold), e;
+      }
+      this.scrollWatcherLogging(
+        "Ой ой, настройку data-watch-margin нужно задавать в PX или %"
+      );
+    }
+    scrollWatcherCreate(t) {
+      this.observer = new IntersectionObserver((t, e) => {
+        t.forEach((t) => {
+          this.scrollWatcherCallback(t, e);
+        });
+      }, t);
+    }
+    scrollWatcherInit(t, e) {
+      this.scrollWatcherCreate(e), t.forEach((t) => this.observer.observe(t));
+    }
+    scrollWatcherIntersecting(t, e) {
+      t.isIntersecting
+        ? (!e.classList.contains("_watcher-view") &&
+            e.classList.add("_watcher-view"),
+          this.scrollWatcherLogging(
+            `Я вижу ${e.classList}, добавил класс _watcher-view`
+          ))
+        : (e.classList.contains("_watcher-view") &&
+            e.classList.remove("_watcher-view"),
+          this.scrollWatcherLogging(
+            `Я не вижу ${e.classList}, убрал класс _watcher-view`
+          ));
+    }
+    scrollWatcherOff(t, e) {
+      e.unobserve(t),
+        this.scrollWatcherLogging(`Я перестал следить за ${t.classList}`);
+    }
+    scrollWatcherLogging(t) {
+      this.config.logging && i(`[Наблюдатель]: ${t}`);
+    }
+    scrollWatcherCallback(t, e) {
+      const o = t.target;
+      this.scrollWatcherIntersecting(t, o),
+        o.hasAttribute("data-watch-once") &&
+          t.isIntersecting &&
+          this.scrollWatcherOff(o, e),
+        document.dispatchEvent(
+          new CustomEvent("watcherCallback", { detail: { entry: t } })
+        );
+    }
+  }
+  let d = !1;
   setTimeout(() => {
-    if (c) {
-      let e = new Event("windowScroll");
-      window.addEventListener("scroll", function (t) {
-        document.dispatchEvent(e);
+    if (d) {
+      let t = new Event("windowScroll");
+      window.addEventListener("scroll", function (e) {
+        document.dispatchEvent(t);
       });
     }
   }, 0),
     (window.FLS = !0),
-    (function (e) {
-      let t = new Image();
-      (t.onload = t.onerror =
+    (function (t) {
+      let e = new Image();
+      (e.onload = e.onerror =
         function () {
-          e(2 == t.height);
+          t(2 == e.height);
         }),
-        (t.src =
+        (e.src =
           "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA");
-    })(function (e) {
-      let t = !0 === e ? "webp" : "no-webp";
-      document.documentElement.classList.add(t);
+    })(function (t) {
+      let e = !0 === t ? "webp" : "no-webp";
+      document.documentElement.classList.add(e);
     }),
     (function () {
-      let e = document.querySelector(".icon-menu");
-      e &&
-        e.addEventListener("click", function (e) {
-          t && (o(), document.documentElement.classList.toggle("menu-open"));
+      let t = document.querySelector(".icon-menu");
+      t &&
+        t.addEventListener("click", function (t) {
+          e && (o(), document.documentElement.classList.toggle("menu-open"));
         });
     })(),
-    new e({}),
+    new t({}),
     (function () {
-      const e = document.querySelectorAll(
+      const t = document.querySelectorAll(
         "input[placeholder],textarea[placeholder]"
       );
-      e.length &&
-        e.forEach((e) => {
-          e.dataset.placeholder = e.placeholder;
+      t.length &&
+        t.forEach((t) => {
+          t.dataset.placeholder = t.placeholder;
         }),
-        document.body.addEventListener("focusin", function (e) {
-          const t = e.target;
-          ("INPUT" !== t.tagName && "TEXTAREA" !== t.tagName) ||
-            (t.dataset.placeholder && (t.placeholder = ""),
-            t.classList.add("_form-focus"),
-            t.parentElement.classList.add("_form-focus"),
-            a.removeError(t));
+        document.body.addEventListener("focusin", function (t) {
+          const e = t.target;
+          ("INPUT" !== e.tagName && "TEXTAREA" !== e.tagName) ||
+            (e.dataset.placeholder && (e.placeholder = ""),
+            e.classList.add("_form-focus"),
+            e.parentElement.classList.add("_form-focus"),
+            c.removeError(e));
         }),
-        document.body.addEventListener("focusout", function (e) {
-          const t = e.target;
-          ("INPUT" !== t.tagName && "TEXTAREA" !== t.tagName) ||
-            (t.dataset.placeholder && (t.placeholder = t.dataset.placeholder),
-            t.classList.remove("_form-focus"),
-            t.parentElement.classList.remove("_form-focus"),
-            t.hasAttribute("data-validate") && a.validateInput(t));
+        document.body.addEventListener("focusout", function (t) {
+          const e = t.target;
+          ("INPUT" !== e.tagName && "TEXTAREA" !== e.tagName) ||
+            (e.dataset.placeholder && (e.placeholder = e.dataset.placeholder),
+            e.classList.remove("_form-focus"),
+            e.parentElement.classList.remove("_form-focus"),
+            e.hasAttribute("data-validate") && c.validateInput(e));
         });
     })(),
-    (function (e) {
-      const t = document.forms;
-      if (t.length)
-        for (const e of t)
-          e.addEventListener("submit", function (e) {
-            o(e.target, e);
+    (function (t) {
+      const e = document.forms;
+      if (e.length)
+        for (const t of e)
+          t.addEventListener("submit", function (t) {
+            o(t.target, t);
           }),
-            e.addEventListener("reset", function (e) {
-              const t = e.target;
-              a.formClean(t);
+            t.addEventListener("reset", function (t) {
+              const e = t.target;
+              c.formClean(e);
             });
-      async function o(t, o) {
-        if (0 === (e ? a.getErrors(t) : 0)) {
-          if (t.hasAttribute("data-ajax")) {
+      async function o(e, o) {
+        if (0 === (t ? c.getErrors(e) : 0)) {
+          if (e.hasAttribute("data-ajax")) {
             o.preventDefault();
-            const e = t.getAttribute("action")
-                ? t.getAttribute("action").trim()
+            const t = e.getAttribute("action")
+                ? e.getAttribute("action").trim()
                 : "#",
-              n = t.getAttribute("method")
-                ? t.getAttribute("method").trim()
+              n = e.getAttribute("method")
+                ? e.getAttribute("method").trim()
                 : "GET",
-              i = new FormData(t);
-            t.classList.add("_sending");
-            const r = await fetch(e, { method: n, body: i });
+              i = new FormData(e);
+            e.classList.add("_sending");
+            const r = await fetch(t, { method: n, body: i });
             if (r.ok) {
               await r.json();
-              t.classList.remove("_sending"), s(t);
-            } else alert("Ошибка"), t.classList.remove("_sending");
-          } else t.hasAttribute("data-dev") && (o.preventDefault(), s(t));
+              e.classList.remove("_sending"), s(e);
+            } else alert("Ошибка"), e.classList.remove("_sending");
+          } else e.hasAttribute("data-dev") && (o.preventDefault(), s(e));
         } else {
           o.preventDefault();
-          const e = t.querySelector("._form-error");
-          e && t.hasAttribute("data-goto-error") && r(e, !0, 1e3);
+          const t = e.querySelector("._form-error");
+          t && e.hasAttribute("data-goto-error") && a(t, !0, 1e3);
         }
       }
-      function s(e) {
+      function s(t) {
         document.dispatchEvent(
-          new CustomEvent("formSent", { detail: { form: e } })
+          new CustomEvent("formSent", { detail: { form: t } })
         ),
-          a.formClean(e),
+          c.formClean(t),
           i(`[Формы]: ${"Форма отправлена!"}`);
       }
-    })(!0);
+    })(!0),
+    new h({}),
+    (function () {
+      function t(t) {
+        if ("click" === t.type) {
+          const e = t.target;
+          if (e.closest("[data-goto]")) {
+            const o = e.closest("[data-goto]"),
+              s = o.dataset.goto ? o.dataset.goto : "",
+              n = !!o.hasAttribute("data-goto-header"),
+              i = o.dataset.gotoSpeed ? o.dataset.gotoSpeed : "500";
+            a(s, n, i), t.preventDefault();
+          }
+        } else if ("watcherCallback" === t.type && t.detail) {
+          const e = t.detail.entry,
+            o = e.target;
+          if ("navigator" === o.dataset.watch) {
+            const t = o.id,
+              s = document.querySelector("[data-goto]._navigator-active"),
+              n = document.querySelector(`[data-goto="#${t}"]`);
+            e.isIntersecting
+              ? (s && s.classList.remove("_navigator-active"),
+                n && n.classList.add("_navigator-active"))
+              : n && n.classList.remove("_navigator-active");
+          }
+        }
+      }
+      document.addEventListener("click", t),
+        document.addEventListener("watcherCallback", t);
+    })(),
+    (function () {
+      d = !0;
+      const t = document.querySelector("header.header"),
+        e = t.hasAttribute("data-scroll-show"),
+        o = t.dataset.scrollShow ? t.dataset.scrollShow : 500,
+        s = t.dataset.scroll ? t.dataset.scroll : 1;
+      let n,
+        i = 0;
+      document.addEventListener("windowScroll", function (r) {
+        const a = window.scrollY;
+        clearTimeout(n),
+          a >= s
+            ? (!t.classList.contains("_header-scroll") &&
+                t.classList.add("_header-scroll"),
+              e &&
+                (a > i
+                  ? t.classList.contains("_header-show") &&
+                    t.classList.remove("_header-show")
+                  : !t.classList.contains("_header-show") &&
+                    t.classList.add("_header-show"),
+                (n = setTimeout(() => {
+                  !t.classList.contains("_header-show") &&
+                    t.classList.add("_header-show");
+                }, o))))
+            : (t.classList.contains("_header-scroll") &&
+                t.classList.remove("_header-scroll"),
+              e &&
+                t.classList.contains("_header-show") &&
+                t.classList.remove("_header-show")),
+          (i = a <= 0 ? 0 : a);
+      });
+    })();
 })();
